@@ -153,3 +153,5 @@ constexpr Ref<T> CreateRef(Args &&...args) {
 
     abort();
 }
+
+#include <QtWidgets/QtWidgets>

@@ -16,6 +16,9 @@ include(Cache)
 include(Sanitizers)
 include(Warnings)
 
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
+qt_standard_project_setup()
+
 file(
   GLOB_RECURSE
   ${PROJECT_NAME}_SRC
@@ -27,7 +30,7 @@ file(
   ${PROJECT_SOURCE_DIR}/../target/cxxbridge/cxx-bindings/src/*.cc
   ${PROJECT_SOURCE_DIR}/../target/cxxbridge/cxx-bindings/src/*.h)
 
-add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRC})
+qt_add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRC})
 target_include_directories(
   ${PROJECT_NAME}
   PRIVATE include ${PROJECT_SOURCE_DIR}/../target/cxxbridge/cxx-bindings/src)
@@ -35,8 +38,11 @@ target_link_libraries(
   ${PROJECT_NAME}
   PUBLIC
     ${PROJECT_SOURCE_DIR}/../target/$<IF:$<CONFIG:Debug>,debug,release>/libcxx_bindings.a
-)
+  PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
 target_precompile_headers(${PROJECT_NAME} PRIVATE "include/Precompiled.hpp")
 
 enable_sanitizers(${PROJECT_NAME})
 set_project_warnings(${PROJECT_NAME})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE ON
+                                                 MACOSX_BUNDLE ON)
