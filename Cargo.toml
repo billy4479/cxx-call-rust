@@ -1,0 +1,10 @@
+[workspace]
+
+members = ["crates/my-crate", "crates/cxx-bindings"]
+
+resolver = "2"
+
+[workspace.dependencies]
+cxx = "1.0.107"
+cxx-build = "1.0"
+anyhow = "1"
