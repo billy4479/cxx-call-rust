@@ -5,7 +5,6 @@ class MyButton : public QPushButton {
 
   public:
     MyButton();
-    ~MyButton();
 
   public slots:
     void on_clicked();

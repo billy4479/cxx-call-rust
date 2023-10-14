@@ -39,7 +39,7 @@ using std::size_t;
     /* Windows x64/x86 */
     #ifdef _WIN64
         /* Windows x64  */
-        #define PLATFORM_WINDOWS
+        #define PLATFORM_WINDOWS 1
     #else
         /* Windows x86 */
         #error "x86 Builds are not supported!"
@@ -55,7 +55,7 @@ using std::size_t;
     #elif TARGET_OS_IPHONE == 1
         #error "IOS is not supported!"
     #elif TARGET_OS_MAC == 1
-        #define PLATFORM_MACOS
+        #define PLATFORM_MACOS 1
     #else
         #error "Unknown Apple platform!"
     #endif
@@ -65,32 +65,32 @@ using std::size_t;
 #elif defined(__ANDROID__)
     #error "Android is not supported!"
 #elif defined(__linux__)
-    #define PLATFORM_LINUX
+    #define PLATFORM_LINUX 1
 #elif defined(SWIG)
-    #define PLATFORM_SWIG
+    #define PLATFORM_SWIG 1
 #else
     /* Unknown compiler/platform */
     #if NO_UNKNOWN_PLATFORM
         #error "Unknown platform!"
     #else
-        #define PLATFORM_UNKNOWN
+        #define PLATFORM_UNKNOWN 1
     #endif
 #endif
 
 // End of platform detection
 
 #if defined(__clang__)
-    #define COMPILER_CLANG
+    #define COMPILER_CLANG 1
 #elif defined(__GNUC__) || defined(__GNUG__)
-    #define COMPILER_GCC
+    #define COMPILER_GCC 1
 #elif defined(_MSC_VER)
-    #define COMPILER_MSVC
+    #define COMPILER_MSVC 1
 #elif defined(SWIG)
 #else
     #if NO_UNKNOWN_COMPILER
         #error "Unsupported compiler"
     #else
-        #define COMPILER_UNKNOWN
+        #define COMPILER_UNKNOWN 1
     #endif
 #endif
 
@@ -146,12 +146,9 @@ constexpr Ref<T> CreateRef(Args &&...args) {
 
 [[noreturn]] inline void VERIFY_NOT_REACHED() {
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstring-conversion"
-    assert(false || "Unreachable");
-#pragma GCC diagnostic pop
+    std::cerr << "Unreachable!" << std::endl;
 
-    abort();
+    std::terminate();
 }
 
 #include <QtWidgets/QtWidgets>

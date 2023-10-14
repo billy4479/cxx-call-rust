@@ -14,7 +14,3 @@ void MyButton::on_clicked() {
                           QMessageBox::StandardButton::Yes |
                               QMessageBox::StandardButton::No);
 }
-
-MyButton::~MyButton() {
-    // disconnect()
-}

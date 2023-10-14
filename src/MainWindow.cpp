@@ -6,6 +6,10 @@ MainWindow::MainWindow() {
     setWindowTitle("Qt6 in C++");
     setMinimumSize(QSize(800, 600));
 
+#if PLATFORM_LINUX
+    setAttribute(Qt::WidgetAttribute::WA_X11NetWmWindowTypeUtility);
+#endif
+
     auto layout = new QVBoxLayout();
     layout->addWidget(new MyButton());
 

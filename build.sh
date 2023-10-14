@@ -2,12 +2,10 @@
 
 set -e
 
-if [ "$1" = "--release" ]; then 
-    cargo build --release
-    cmake -B build -S cxx -D CMAKE_BUILD_TYPE=Release
-    cmake --build build
+if [ "$1" = "--release" ]; then
+    cmake -B build -D CMAKE_BUILD_TYPE=Release
 else
-    cargo build
-    cmake -B build -S cxx -D CMAKE_BUILD_TYPE=Debug
-    cmake --build build
+    cmake -B build -D CMAKE_BUILD_TYPE=Debug
 fi
+
+cmake --build build
