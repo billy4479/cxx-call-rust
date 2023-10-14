@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 project(
-  cxx
+  rust-qt # Change this
   VERSION 0.0.1
   LANGUAGES CXX)
 
