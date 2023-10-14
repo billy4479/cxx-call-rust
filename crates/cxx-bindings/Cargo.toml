@@ -7,8 +7,8 @@ edition = "2021"
 crate-type = ["staticlib"]
 
 [dependencies]
-cxx = { workspace = true }
+cxx = "1.0"
 my-crate = { path = "../my-crate" }
 
 [build-dependencies]
-cxx-build = { workspace = true }
+cxx-build = "1.0"
